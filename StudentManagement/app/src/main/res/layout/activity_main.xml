@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/mainTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -22,7 +22,7 @@
         android:layout_height="460dp"
         android:layout_marginTop="60dp"
         android:id="@+id/studentListView"
-        app:layout_constraintTop_toBottomOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@+id/mainTitle"
         tools:layout_editor_absoluteX="-30dp" />
 
 

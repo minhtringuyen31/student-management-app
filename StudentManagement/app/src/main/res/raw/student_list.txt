@@ -1,5 +1,0 @@
-Nguyen Van A - 20KTPM01 - 01/01/2002 - Male
-Nguyen Van B - 20KTPM01 - 01/01/2002 - Male
-Vo Ngoc C - 20KTPM2 - 01/01/2002 - Female
-Pham Thi D - 20KTPM2 - 01/01/2002 - Female
-Vo Tan E - 20KTPM2 - 01/01/2002 - Male

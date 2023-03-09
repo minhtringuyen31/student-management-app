@@ -7,36 +7,28 @@
     tools:context=".StudentInformationActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/studentInformationTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:text="Student Information"
-        android:textSize="30dp"
+        android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="80dp"
-        android:text="Full Name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:text="Birthday"
+        android:layout_marginTop="30dp"
+        android:text="Full Name"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailFullName" />
+        app:layout_constraintTop_toBottomOf="@+id/studentInformationTV" />
 
     <TextView
         android:id="@+id/textView4"
@@ -44,9 +36,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
-        android:text="Class"
+        android:text="Birthday"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailDateOfBirth" />
+        app:layout_constraintTop_toBottomOf="@+id/fullNameET" />
 
     <TextView
         android:id="@+id/textView5"
@@ -54,103 +48,134 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
-        android:text="Gender"
+        android:text="Class"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailClassName" />
+        app:layout_constraintTop_toBottomOf="@+id/dateOfBirthET" />
 
-    <EditText
-        android:id="@+id/detailFullName"
-        android:layout_width="0dp"
-        android:layout_height="37dp"
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        android:text="Gender"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/classNameTV_edit" />
 
     <EditText
-        android:id="@+id/detailDateOfBirth"
+        android:id="@+id/fullNameET"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="30dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <EditText
-        android:id="@+id/detailClassName"
+        android:id="@+id/dateOfBirthET"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="30dp"
-        android:clickable="true"
         android:ems="10"
-        android:focusable="false"
-        android:inputType="textPersonName"
-        android:text="Name"
+        android:inputType="datetime"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
+
     <RadioGroup
-        android:layout_width="333dp"
-        android:layout_height="53dp"
+        android:id="@+id/editGender"
+        android:layout_width="363dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:checkedButton="@+id/maleRB_edit"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5">
+        app:layout_constraintTop_toBottomOf="@+id/textView6">
 
         <RadioButton
-            android:id="@+id/radioButton"
+            android:id="@+id/maleRB_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
+            android:layout_marginRight="60sp"
             android:text="Male" />
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/femaleRB_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
+            android:layout_marginRight="60sp"
             android:text="Female" />
 
         <RadioButton
-            android:id="@+id/radioButton3"
+            android:id="@+id/otherGenderRB_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:clickable="true"
             android:text="Other" />
     </RadioGroup>
 
     <Button
-        android:id="@+id/detailDeleteBtn"
+        android:id="@+id/saveEditStudentBtn"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="20dp"
-        android:text="Delete"
-        app:layout_constraintBottom_toTopOf="@+id/detailSaveBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/detailSaveBtn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="#03A9F4"
         android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/deleteStudentBtn"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="#FF5722"
+        android:text="Delete"
+        app:layout_constraintBottom_toTopOf="@+id/saveEditStudentBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/classNameTV_edit"
+        style="@android:style/Widget.EditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:clickable="true"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/classNameTV_edit"
+        app:layout_constraintEnd_toEndOf="@+id/classNameTV_edit"
+        app:layout_constraintTop_toTopOf="@+id/classNameTV_edit"/>
+<!--        app:srcCompat="@drawable/ic_baseline_arrow_drop_down_24"-->
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

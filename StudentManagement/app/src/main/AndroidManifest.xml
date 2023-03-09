@@ -12,7 +12,7 @@
         android:theme="@style/Theme.StudentManagement"
         tools:targetApi="31">
         <activity
-            android:name=".ChooseClass"
+            android:name=".ChooseClassActivity"
             android:exported="false" />
         <activity
             android:name=".AddNewStudentActivity"
@@ -22,7 +22,6 @@
             android:name=".StudentInformationActivity"
             android:exported="false"
             android:parentActivityName=".MainActivity"/>
-
         <activity
             android:name=".MainActivity"
             android:exported="true">

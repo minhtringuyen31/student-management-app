@@ -6,76 +6,85 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ListView
-import java.io.BufferedReader
-import java.io.IOException
-import java.io.InputStream
-import java.io.InputStreamReader
+import java.io.*
 
 class MainActivity : AppCompatActivity() {
-
+    var adapter: StudentListAdapter?= null
+    var studentNameList = ArrayList<String>()
+    var studentClassList = ArrayList<String>()
+    var otherInformation= ArrayList<String>()
     var studentList = StudentListModel()
-    @Throws(IOException::class)
-    fun readData() {
-        val iStream: InputStream = resources.openRawResource(R.raw.student_list)
-        val reader = BufferedReader(InputStreamReader(iStream))
-        if (iStream != null){
+    val fileName = "studentList.txt"
+    var addNewBtn : Button? =null
+    var studentListView: ListView?= null
+
+    fun readData(){
+        studentNameList.clear()
+        studentClassList.clear()
+        otherInformation.clear()
+        studentList.getStudentList().clear()
+
+        val iStream: InputStream? = openFileInput(fileName)
+        val inputStreamReader = InputStreamReader(iStream)
+        val reader = BufferedReader(inputStreamReader)
+        if (iStream != null) {
             var line: String? = reader.readLine()
-            while (line!=null){
-                var detail: List<String>?=null
-                detail = line.split("-")
-                var student = StudentModel(detail[0], detail[1], detail[2], detail[3])
-                studentList?.addStudent(student)
+            while (line != null) {
+                var student = StudentModel.parseStudent(line)
+                studentList.addStudent(student)
+                studentNameList.add(student.getFullName())
+                studentClassList.add(student.getClassName())
+                otherInformation.add(student.getDateOfBirth() + " - " + student.getGender())
                 line = reader.readLine()
             }
+            iStream.close()
         }
-        iStream.close()
+    }
+
+    fun updateFile(studentList: StudentListModel){
+        val out = OutputStreamWriter(openFileOutput(fileName, 0))
+        for (i in studentList.getStudentList().indices){
+            out.write(studentList.getStudentList()[i].toString())
+            out.write("\n")
+        }
+        out.close()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         this.readData()
 
-        val addNewBtn: Button = findViewById(R.id.addNewBtn)
-        val studentListView:ListView = findViewById(R.id.studentListView)
-
-        addNewBtn.setOnClickListener{
+        studentListView = findViewById(R.id.studentsListView)
+        addNewBtn = findViewById(R.id.addNewBtn)
+        addNewBtn?.setOnClickListener{
             val intent = Intent(this, AddNewStudentActivity::class.java)
-            startActivity(intent)
-        }
-
-        var adapter:StudentListAdapter = StudentListAdapter(this, studentList.getStudentList())
-        studentListView?.adapter = adapter
-        studentListView?.setOnItemClickListener{parent, view, position, id ->
-            val fullName =studentList.getStudentList()[position].fullName
-            val className  =studentList.getStudentList()[position].className
-            val dateOfBirth = studentList.getStudentList()[position].dateOfBirth
-            val gender = studentList.getStudentList()[position].gender
-
-            val student = StudentModel(fullName, className, dateOfBirth, gender)
-
-            val intent = Intent(this, StudentInformationActivity::class.java)
-            intent.putExtra("student", student)
-            intent.putExtra("fullName", fullName)
-
+            intent.putExtra("studentList", studentList)
             startActivityForResult(intent, REQUEST_CODE)
         }
-
+        adapter = StudentListAdapter(this, studentNameList, studentClassList, otherInformation)
+        studentListView?.adapter = adapter
+        studentListView?.setOnItemClickListener { adapterView, view, i, l ->
+            val intent = Intent(this, StudentInformationActivity::class.java)
+            val string: List<String> = otherInformation[i].split("-")
+            val oldStudent = StudentModel(studentNameList[i], string[0].trim(), studentClassList[i], string[1].trim())
+            intent.putExtra("oldStudent", oldStudent)
+            intent.putExtra("studentList", studentList)
+            startActivityForResult(intent, REQUEST_CODE)
+        }
     }
-    val REQUEST_CODE = 1111
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//        if(requestCode === REQUEST_CODE){
-//            if (resultCode === Activity.RESULT_OK){
-//                val reply = data!!.getStringExtra()
-//            }
-//        }
-//    }
-
-    fun updateInformation(){
-
+    val REQUEST_CODE = 1112
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode === REQUEST_CODE){
+            if (resultCode === Activity.RESULT_OK){
+                val reply = data!!.getSerializableExtra("newStudentList") as StudentListModel
+                this.updateFile(reply)
+                adapter!!.clear()
+                this.readData()
+                adapter = StudentListAdapter(this, studentNameList, studentClassList, otherInformation)
+                studentListView!!.adapter = adapter
+            }
+        }
     }
-
-
 }
